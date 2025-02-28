@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My C Projects</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="c_projects.html">C Projects</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="projects">
+            <h2>My C Projects</h2>
+            <div class="project">
+                <h3>Project 1: Dynamic Array Allocation</h3>
+                <p>This project demonstrates how to dynamically allocate an array and store square numbers using C.</p>
+                <pre><code>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main() {
+    int *arr;
+    int n = 5;
+    arr = (int*)malloc(n * sizeof(int));
+
+    if (arr == NULL) {
+        printf("Memory allocation failed.\n");
+        return 1;
+    }
+
+    for (int i = 0; i < n; i++) {
+        arr[i] = i * i;  // Store square numbers
+    }
+
+    for (int i = 0; i < n; i++) {
+        printf("arr[%d] = %d\n", i, arr[i]);
+    }
+
+    free(arr);
+    return 0;
+}
+                </code></pre>
+            </div>
+            <div class="project">
+                <h3>Project 2: Linked List</h3>
+                <p>This project demonstrates how to create and print a linked list in C.</p>
+                <pre><code>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void printList(struct Node* head) {
+    struct Node* temp = head;
+    while (temp != NULL) {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
+int main() {
+    struct Node* head = NULL;
+    struct Node* second = NULL;
+    struct Node* third = NULL;
+
+    head = (struct Node*)malloc(sizeof(struct Node));
+    second = (struct Node*)malloc(sizeof(struct Node));
+    third = (struct Node*)malloc(sizeof(struct Node));
+
+    head->data = 1;
+    head->next = second;
+
+    second->data = 2;
+    second->next = third;
+
+    third->data = 3;
+    third->next = NULL;
+
+    printList(head);
+
+    free(head);
+    free(second);
+    free(third);
+
+    return 0;
+}
+                </code></pre>
+            </div>
+            <div class="project">
+                <h3>Project 3: File Operations</h3>
+                <p>This project demonstrates file read/write operations in C.</p>
+                <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+    FILE *fptr;
+    char ch;
+
+    fptr = fopen("example.txt", "w");
+    if (fptr == NULL) {
+        printf("Unable to open file for writing.\n");
+        return 1;
+    }
+
+    fprintf(fptr, "Hello, C Programming!");
+    fclose(fptr);
+
+    fptr = fopen("example.txt", "r");
+    if (fptr == NULL) {
+        printf("Unable to open file for reading.\n");
+        return 1;
+    }
+
+    while ((ch = fgetc(fptr)) != EOF) {
+        printf("%c", ch);
+    }
+
+    fclose(fptr);
+    return 0;
+}
+                </code></pre>
+            </div>
+            <div class="project">
+                <h3>Project 4: Multithreading with pthreads</h3>
+                <p>This project demonstrates how to create and manage threads using pthreads in C.</p>
+                <pre><code>
+#include &lt;stdio.h&gt;
+#include &lt;pthread.h&gt;
+
+void* print_message(void* message) {
+    printf("%s\n", (char*)message);
+    return NULL;
+}
+
+int main() {
+    pthread_t thread1, thread2;
+
+    char* message1 = "Hello from Thread 1!";
+    char* message2 = "Hello from Thread 2!";
+
+    pthread_create(&thread1, NULL, print_message, (void*)message1);
+    pthread_create(&thread2, NULL, print_message, (void*)message2);
+
+    pthread_join(thread1, NULL);
+    pthread_join(thread2, NULL);
+
+    return 0;
+}
+                </code></pre>
+            </div>
+            <div class="project">
+                <h3>Project 5: Quick Sort Algorithm</h3>
+                <p>This project demonstrates how to implement the Quick Sort algorithm in C.</p>
+                <pre><code>
+#include &lt;stdio.h&gt;
+
+void swap(int* a, int* b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int partition(int arr[], int low, int high) {
+    int pivot = arr[high];
+    int i = low - 1;
+
+    for (int j = low; j < high; j++) {
+        if (arr[j] < pivot) {
+            i++;
+            swap(&arr[i], &arr[j]);
+        }
+    }
+    swap(&arr[i + 1], &arr[high]);
+    return i + 1;
+}
+
+void quickSort(int arr[], int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+
+int main() {
+    int arr[] = {10, 80, 30, 90, 40, 50, 70};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    quickSort(arr, 0, n - 1);
+
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+
+    return 0;
+}
+                </code></pre>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 My Portfolio. All rights reserved.</p>
+    </footer>
+</body>
+</html>

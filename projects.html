@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="c_projects.html">C Projects</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="projects">
+            <h2>My Projects</h2>
+            <div class="project">
+                <h3>Project 1: Logging Function Calls</h3>
+                <p>This project demonstrates how to log function calls using a decorator in Python.</p>
+                <pre><code>
+def log_function_call(func):
+    def wrapper(*args, **kwargs):
+        print(f"Calling function: {func.__name__} with arguments: {args} and keyword arguments: {kwargs}")
+        result = func(*args, **kwargs)
+        print(f"Function {func.__name__} returned: {result}")
+        return result
+    return wrapper
+
+@log_function_call
+def add(a, b):
+    return a + b
+
+add(3, 5)
+                </code></pre>
+            </div>
+            <div class="project">
+                <h3>Project 2: File Manager Context Manager</h3>
+                <p>This project demonstrates how to create a context manager for file operations in Python.</p>
+                <pre><code>
+class FileManager:
+    def __init__(self, filename, mode):
+        self.filename = filename;
+        self.mode = mode;
+        self.file = NULL;
+
+    def __enter__(self):
+        self.file = open(self.filename, self.mode);
+        return self.file;
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        if self.file:
+            self.file.close();
+        if exc_type:
+            print(f"Exception: {exc_type}, {exc_value}");
+        return True  // suppress exceptions;
+
+with FileManager("test.txt", "w") as f:
+    f.write("Hello, World!");
+                </code></pre>
+            </div>
+            <div class="project">
+                <h3>Project 3: Asyncio Tasks</h3>
+                <p>This project demonstrates how to run asynchronous tasks concurrently using the asyncio module in Python.</p>
+                <pre><code>
+import asyncio;
+
+async def task_one():
+    print("Task 1 started");
+    await asyncio.sleep(2);
+    print("Task 1 finished");
+
+async def task_two():
+    print("Task 2 started");
+    await asyncio.sleep(1);
+    print("Task 2 finished");
+
+async def main():
+    await asyncio.gather(task_one(), task_two());
+
+asyncio.run(main());
+                </code></pre>
+            </div>
+            <div class="project">
+                <h3>Project 4: Fibonacci with LRU Cache</h3>
+                <p>This project demonstrates how to use the functools.lru_cache decorator to optimize the Fibonacci function in Python.</p>
+                <pre><code>
+from functools import lru_cache;
+
+@lru_cache(maxsize=None)
+def fibonacci(n):
+    if n <= 1:
+        return n;
+    return fibonacci(n-1) + fibonacci(n-2);
+
+print(fibonacci(100));
+                </code></pre>
+            </div>
+            <div class="project">
+                <h3>Project 5: Thread Pool Executor</h3>
+                <p>This project demonstrates how to use the ThreadPoolExecutor to manage multiple threads in Python.</p>
+                <pre><code>
+from concurrent.futures import ThreadPoolExecutor;
+
+def task(n):
+    print(f"Task {n} is starting");
+    return f"Result from Task {n}";
+
+with ThreadPoolExecutor(max_workers=3) as executor:
+    results = executor.map(task, range(5));
+    for result in results:
+        print(result);
+                </code></pre>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 My Portfolio. All rights reserved.</p>
+    </footer>
+</body>
+</html>
